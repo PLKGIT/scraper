@@ -1,0 +1,34 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "Scraping assignment.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PLKGIT/scraper.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Mongoose",
+    "Cheerio",
+    "Axios",
+    "MongoDB"
+  ],
+  "author": "Pam Kelly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PLKGIT/scraper/issues"
+  },
+  "homepage": "https://github.com/PLKGIT/scraper#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.2",
+    "mongoose": "^5.9.7"
+  }
+}
