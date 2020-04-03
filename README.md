@@ -2,7 +2,7 @@
 Homework #14
 
 ## Overview
-TBD
+Create a web app that lets users view and leave comments on the latest news scraped from another site using Mongoose and Cheerio.
 
 * Create an app that accomplishes the following:
 
@@ -27,7 +27,6 @@ TBD
 * Don't just clear out your database and populate it with scraped articles whenever a user accesses your site.
 
   * If your app deletes stories every time someone visits, your users won't be able to see any comments except the ones that they post.
-
 
 
 ### Technologies Used
