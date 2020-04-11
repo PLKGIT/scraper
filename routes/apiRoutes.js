@@ -4,12 +4,6 @@ var express = require("express");
 module.exports = function (app) {
 
     // A GET route for scraping the USA Today website
-    app.get("/", function (req, res) {
-        // Send a message to the client
-        res.send("Welcome to Reuters");
-    });
-
-    // A GET route for scraping the USA Today website
     app.get("/scrape", function (req, res) {
         // First, we grab the body of the html with axios
         axios.get("https://www.reuters.com/breakingviews").then(function (response) {
