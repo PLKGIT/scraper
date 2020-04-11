@@ -42,28 +42,28 @@ app.get("/", function (req, res) {
 // A GET route for scraping the USA Today website
 app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.bbc.com/").then(function (response) {
+  axios.get("https://www.reuters.com/breakingviews").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     // Now, we grab every h2 within an article tag, and do the following:
     // Now, we grab every h2 within an article tag, and do the following:
-    $(".media-list__item").each(function (i, element) {
+    $("article").each(function (i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
 
       result.title = $(this)
-        .find("h3 a")
-        .text();
-      result.url = $(this)
-        .find("h3 a")
+        .find(".story-title")
+        .text().trim();
+      result.link = "https://www.reuters.com/" + $(this)
+        .find(".story-content a")
         .attr("href");
       result.summary = $(this)
-        .find("p")
-        .text();
+        .find(".story-content p")
+        .text().trim();
       result.image = $(this)
-        .find(".responsive-image img")
+        .find("a img")
         .attr("src");
 
       // Create a new Article using the `result` object built from scraping
