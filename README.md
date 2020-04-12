@@ -7,14 +7,16 @@ Web app that allows users to view and leave comments on the latest news scraped 
 ### Technologies Used
   * Node JS v12.13.0
   * Express Node Package Manager (NPM) v4.17.1
+  * Cherrio NPM
   * Axios NPM
-  * Handlebars NPM
   * MongoDB
-  * Mongoose
+  * Mongoose NPM
+  * Handlebars NPM
   * Heroku
   * HTML
   * CSS
-  * Materialize CSS and Icons
+  * Materialize CSS
+  * Material Icons
 
 ### Using the Scraper
   * Launch Scraper web application
