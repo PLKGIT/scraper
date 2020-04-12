@@ -1,7 +1,6 @@
 // Dependencies
 var express = require("express");
 var exphbs = require("express-handlebars");
-var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // Require axios and cheerio for scraping
@@ -18,8 +17,6 @@ var app = express();
 
 // Middleware
 
-// Use morgan logger for logging requests
-app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

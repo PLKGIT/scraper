@@ -11,7 +11,7 @@ $.getJSON("/articles", function (data) {
           + data[i].title + "</h6></b><a href='"
           + data[i].link + "' target=_blank>"
           + data[i].summary + "</a><br/>"
-          + "<span class='right'> <a class='btn-flat waves-effect waves-teal teal-text'>Save Article</a>&nbsp;<a class='btn-flat waves-effect waves-red red-text'>Delete Article</a></span>"
+          + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
           + "</p><br clear='left' />"
         );
 
@@ -23,45 +23,58 @@ $.getJSON("/articles", function (data) {
           + data[i].title + "</h6></b><a href='"
           + data[i].link + "' target=_blank>"
           + data[i].summary + "</a><br/>"
-          + "<span class='right'> <a class='btn-flat waves-effect waves-teal teal-text'>Save Article</a>&nbsp;<a class='btn-flat waves-effect waves-red red-text'>Delete Article</a></span>"
+          + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
           + "</p><br clear='left' />"
         );
     }
   }
 });
 
+// Click on Scrape  button
+$(document).on("click", ".scrape", function () {
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function () {
-  // Empty the notes from the note section
-  $("#notes").empty();
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "GET",
+    url: "/scrape/"
+  })
+    .then(function (data) {
+      console.log("scrape complete")
+      location.reload();
+    });
+});
+
+// Click on add article button
+$(document).on("click", ".add", function () {
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
-  // Now make an ajax call for the Article
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "POST",
+    url: "/articlessav/" + thisId,
+    data: {
+      saved: true
+    }
+  })
+    .then(function (data) {
+      console.log("Updated Record")
+      console.log(data);
+    });
+});
+
+// Click on del article button
+$(document).on("click", ".del", function () {
+  // Save the id from the p tag
+  var thisId = $(this).attr("data-id");
+
   $.ajax({
     method: "GET",
-    url: "/articles/" + thisId
+    url: "/articlesdel/" + thisId
   })
-    // With that done, add the note information to the page
     .then(function (data) {
+      console.log("Deleted Record")
       console.log(data);
-      // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
-      // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-
-      // If there's a note in the article
-      if (data.note) {
-        // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
-      }
     });
 });
 
