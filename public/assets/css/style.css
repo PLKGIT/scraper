@@ -1,58 +1,6 @@
-body{
-    background-color: #669cff;
-}
-
-h2{
-    color: blue;
-}
-
-li{
-    padding: 5px;
-    margin: 5px;
-    background: white;
-    list-style: none;
-    color: darkgray
-}
-.boxed {
-    padding: 15px;
-    margin: 5px;
-    border: 1px solid lightgray ;
-    background-color: white;
-  }
-
 .error{
     font-weight: bolder;
     font-size: smaller;
     font-style: italic;
     color: black;
-  }
-
-  #wrapper {
-    width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-  }
-  #articles {
-    display: inline-block;
-    overflow: auto;
-    width: 60%;
-    height: 700px;
-  }
-  #notes {
-    float: right;
-    width: 30%;
-  }
-  textarea, input {
-    display: block;
-    width: 100%;
-    background-color: #FCF5C7;
-  }
-  input {
-    height: 36px;
-    font-size: 24px;
-  }
-  textarea {
-    height: 200px;
-    font-size: 18px;
   }

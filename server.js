@@ -3,6 +3,7 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+
 // Require axios and cheerio for scraping
 var axios = require("axios");
 var cheerio = require("cheerio");

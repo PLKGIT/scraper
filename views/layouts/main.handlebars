@@ -4,37 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scraper</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Reuters Mongo Scrape</title>
+    <!-- Materialize CSS and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- My CSS -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
 </head>
 
 <body>
-    <div class="container my-3">
-        <header>
-            <h1>Scraper Project</h1>
-        </header>
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper teal darken-4 z-depth-4">
+                <a href="#!" class="brand-logo"> &nbsp;Reuters</a>
+                <a href="#!" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="saved">My Articles</a></li>
+                        <li><a href="">Get New Articles</a></li>
+                        <li><a href="">Delete Old Articles</a></li>
+                    </ul>
+            </div>
+        </nav>
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="/">Home</a></li>
+            <li><a href="saved">My Articles</a></li>
+            <li><a href="">Get New Articles</a></li>
+            <li><a href="">Delete Old Articles</a></li>
+        </ul>
     </div>
-
-    <div class="container my-3">
+    <div class="container">
+        <br />
+    </div>
+    <div class="container">
 
         {{{ body }}}
 
     </div>
-
-    <div class="container my-3">
-    <footer>
-        <hr>
-        <h6 class="text-center">&copy; Copyright 2020 Pamela L. Kelly</h6>
-    </footer>
+    <div class="container">
+        <br />
     </div>
-    <div class="container my-3"></div>
+    <div class="container">
+        <footer class="page-footer teal darken-2 z-depth-4">
+            <div class="container">
+                <div class="row">
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="/saved">My Articles</a></li>
+                        <li><a class="grey-text text-lighten-3" href="">Get New Articles</a></li>
+                        <li><a class="grey-text text-lighten-3" href="">Delete Old Articles</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright teal darken-4">
+                <div class="container center">
+                    &copy; Copyright 2020 Pamela L. Kelly
+                </div>
+            </div>
+        </footer>
+    </div>
     <!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Matererialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- My JS file -->
     <script src="assets/js/scraper.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+
+    </script>
 </body>
 
 </html>
