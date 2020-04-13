@@ -81,7 +81,7 @@ app.get("/articles", function (req, res) {
             });
     });
 
-    // Route for deleting articles
+    // Route for deleting a single article
     app.get("/articlesdel/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         db.Article.deleteOne({ _id: req.params.id })
@@ -93,6 +93,19 @@ app.get("/articles", function (req, res) {
                 res.json(err);
             });
     });
+
+        // Route for deleting all unsaved article
+        app.get("/articlesdel", function (req, res) {
+            // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+            db.Article.remove({ "saved": "0" })
+                .then(function (dbArticle) {
+                    res.json(dbArticle);
+                })
+                .catch(function (err) {
+                    // If an error occurred, send it to the client
+                    res.json(err);
+                });
+        });
 
 
     // Route for grabbing a specific Article by id, populate it with it's note

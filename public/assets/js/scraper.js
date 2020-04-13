@@ -72,6 +72,19 @@ $(document).on("click", ".scrape", function () {
     });
 });
 
+// Click on Delete Menu Item
+$(document).on("click", ".delete", function () {
+
+  $.ajax({
+    method: "GET",
+    url: "/articlesdel/"
+  })
+    .then(function (data) {
+      console.log("Unsaved Articles Deleted")
+      location = '/'
+    });
+});
+
 // Click on add article button
 $(document).on("click", ".add", function () {
   // Save the id from the p tag
