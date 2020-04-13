@@ -56,22 +56,19 @@ $.getJSON("/articles", function (data) {
       }
 
     }
-
-
   }
 });
 
-// Click on Scrape  button
+// Click on Scrape button
 $(document).on("click", ".scrape", function () {
 
-  // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "GET",
     url: "/scrape/"
   })
     .then(function (data) {
       console.log("scrape complete")
-      location.reload();
+      location = '/'
     });
 });
 
