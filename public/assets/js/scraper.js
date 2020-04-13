@@ -1,32 +1,63 @@
 
-// Grab the articles
+// Grab unsaved articles
 $.getJSON("/articles", function (data) {
   // Loop through articles
   for (var i = 0; i < data.length; i++) {
 
-    if (data[i].image === undefined) {
-      $("#articles")
-        .append("<p data-id='" + data[i]._id
-          + "'><img class='z-depth-2' src='https://dummyimage.com/225x150/aaa/fff.png&text=++Reuters++' align='left' 'width='225' hspace='10'/><b><h6 class='teal-text'>"
-          + data[i].title + "</h6></b><a href='"
-          + data[i].link + "' target=_blank>"
-          + data[i].summary + "</a><br/>"
-          + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
-          + "</p><br clear='left' />"
-        );
+    if (data[i].saved===false){
 
-    } else {
-      $("#articles")
-        .append("<p data-id='" + data[i]._id
-          + "'><img class='z-depth-2' src='"
-          + data[i].image + "' align='left' width='225' hspace='10'/><b><h6 class='teal-text'>"
-          + data[i].title + "</h6></b><a href='"
-          + data[i].link + "' target=_blank>"
-          + data[i].summary + "</a><br/>"
-          + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
-          + "</p><br clear='left' />"
-        );
+      if (data[i].image === undefined) {
+        $("#articles")
+          .append("<p data-id='" + data[i]._id
+            + "'><img class='z-depth-2' src='https://dummyimage.com/225x150/aaa/fff.png&text=++Reuters++' align='left' 'width='225' hspace='10'/><b><h6 class='teal-text'>"
+            + data[i].title + "</h6></b><a href='"
+            + data[i].link + "' target=_blank>"
+            + data[i].summary + "</a><br/>"
+            + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
+            + "</p><br clear='left' />"
+          );
+  
+      } else {
+        $("#articles")
+          .append("<p data-id='" + data[i]._id
+            + "'><img class='z-depth-2' src='"
+            + data[i].image + "' align='left' width='225' hspace='10'/><b><h6 class='teal-text'>"
+            + data[i].title + "</h6></b><a href='"
+            + data[i].link + "' target=_blank>"
+            + data[i].summary + "</a><br/>"
+            + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat add waves-effect waves-teal teal-text'><i class='small material-icons'> playlist_add</i>Save Article</a>&nbsp;<a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
+            + "</p><br clear='left' />"
+          );
+      }
+
+    } else{
+      if (data[i].image === undefined) {
+        $("#articlesaved")
+          .append("<p data-id='" + data[i]._id
+            + "'><img class='z-depth-2' src='https://dummyimage.com/225x150/aaa/fff.png&text=++Reuters++' align='left' 'width='225' hspace='10'/><b><h6 class='teal-text'>"
+            + data[i].title + "</h6></b><a href='"
+            + data[i].link + "' target=_blank>"
+            + data[i].summary + "</a><br/>"
+            + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
+            + "</p><br clear='left' />"
+          );
+  
+      } else {
+        $("#articlesaved")
+          .append("<p data-id='" + data[i]._id
+            + "'><img class='z-depth-2' src='"
+            + data[i].image + "' align='left' width='225' hspace='10'/><b><h6 class='teal-text'>"
+            + data[i].title + "</h6></b><a href='"
+            + data[i].link + "' target=_blank>"
+            + data[i].summary + "</a><br/>"
+            + "<span class='right'><a data-id='" + data[i]._id + "'class='btn-flat del waves-effect waves-red red-text'><i class='small material-icons'> delete_forever</i>Delete Article</a></span>"
+            + "</p><br clear='left' />"
+          );
+      }
+
     }
+
+
   }
 });
 
@@ -60,6 +91,7 @@ $(document).on("click", ".add", function () {
     .then(function (data) {
       console.log("Updated Record")
       console.log(data);
+      location.reload();
     });
 });
 
@@ -75,6 +107,7 @@ $(document).on("click", ".del", function () {
     .then(function (data) {
       console.log("Deleted Record")
       console.log(data);
+      location.reload();
     });
 });
 

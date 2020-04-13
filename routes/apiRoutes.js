@@ -49,30 +49,29 @@ module.exports = function (app) {
             });
 
             // Send a message to the client
-            res.send("Scrape Complete");
+            res.send("Scrape Successful!");
         });
     });
 
+// Route for getting all unsaved Articles from the db
+app.get("/articles", function (req, res) {
+    // Grab every unsaved document in the Articles collection
+    db.Article.find({})
+        .then(function (dbArticle) {
+            // If we were able to successfully find Articles, send them back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+});
 
-    // Route for getting all Articles from the db
-    app.get("/articles", function (req, res) {
-        // Grab every document in the Articles collection
-        db.Article.find({})
-            .then(function (dbArticle) {
-                // If we were able to successfully find Articles, send them back to the client
-                res.json(dbArticle);
-            })
-            .catch(function (err) {
-                // If an error occurred, send it to the client
-                res.json(err);
-            });
-    });
 
-    
-    // Route for grabbing a specific Article by id, populate it with it's note
+    // Route for saving articles
     app.post("/articlessav/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-        db.Article.updateOne({ _id: req.params.id }, {$set: {"saved":"1"}})
+        db.Article.updateOne({ _id: req.params.id }, { $set: { "saved": "1" } })
             .then(function (dbArticle) {
                 res.json(dbArticle);
             })
@@ -82,7 +81,7 @@ module.exports = function (app) {
             });
     });
 
-    // Route for grabbing a specific Article by id, populate it with it's note
+    // Route for deleting articles
     app.get("/articlesdel/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         db.Article.deleteOne({ _id: req.params.id })
