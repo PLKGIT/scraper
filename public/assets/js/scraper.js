@@ -59,7 +59,7 @@ $.getJSON("/articles", function (data) {
   }
 });
 
-// Click on Scrape button
+// Click on Scrape Menu Item
 $(document).on("click", ".scrape", function () {
 
   $.ajax({
@@ -67,8 +67,9 @@ $(document).on("click", ".scrape", function () {
     url: "/scrape/"
   })
     .then(function (data) {
-      console.log("scrape complete")
+      console.log("New Articles Scrape Complete")
       location = '/'
+      location.reload();
     });
 });
 
@@ -82,6 +83,7 @@ $(document).on("click", ".delete", function () {
     .then(function (data) {
       console.log("Unsaved Articles Deleted")
       location = '/'
+      location.reload();
     });
 });
 
@@ -99,7 +101,7 @@ $(document).on("click", ".add", function () {
     }
   })
     .then(function (data) {
-      console.log("Updated Record")
+      console.log("Saved Article")
       console.log(data);
       location.reload();
     });
@@ -107,7 +109,6 @@ $(document).on("click", ".add", function () {
 
 // Click on del article button
 $(document).on("click", ".del", function () {
-  // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
   $.ajax({
@@ -115,7 +116,7 @@ $(document).on("click", ".del", function () {
     url: "/articlesdel/" + thisId
   })
     .then(function (data) {
-      console.log("Deleted Record")
+      console.log("Deleted Article")
       console.log(data);
       location.reload();
     });
