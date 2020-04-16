@@ -107,7 +107,7 @@ $(document).on("click", ".add", function () {
     });
 });
 
-// Click on Delete Article button
+// Click on Delete Article button - deletes any associated notes and then deletes the article.
 $(document).on("click", ".del", function () {
   var thisId = $(this).attr("data-id");
 
@@ -138,11 +138,6 @@ $(document).on("click", ".del", function () {
     res.json(err);
   });
 });
-
-
-
-
-
 
 
 // Add Note

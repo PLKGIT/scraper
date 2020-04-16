@@ -1,5 +1,7 @@
 # All the News That's Fit to Scrape
-Homework #14
+
+![Scraper](./public/assets/img/scraper.gif "Reuters World News Mongo Scraper")
+
 
 ## Overview
 Web app that allows users to view and leave comments on the latest news scraped from Reuters World News using Mongoose and Cheerio. Scraped articles are stored in a MongoDB database.
@@ -7,7 +9,7 @@ Web app that allows users to view and leave comments on the latest news scraped 
 ### Technologies Used
   * Node JS v12.13.0
   * Express Node Package Manager (NPM) v4.17.1
-  * Cherrio NPM
+  * Cheerio NPM
   * Axios NPM
   * MongoDB
   * Mongoose NPM
