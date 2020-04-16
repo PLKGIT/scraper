@@ -7,19 +7,8 @@ var Schema = mongoose.Schema;
 
 // Note Schema
 var NoteSchema = new Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  body: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: Date,
-    required: true,
-    default: Date.now
-  }
+  title: String,
+  body: String
 });
 
 // Mongoose Model

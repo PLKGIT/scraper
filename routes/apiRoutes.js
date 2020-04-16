@@ -13,59 +13,63 @@ module.exports = function (app) {
     // A GET route for scraping the USA Today website
     app.get("/scrape", function (req, res) {
         // First, we grab the body of the html with axios
-        axios.get("https://www.reuters.com/news/world").then(function (response) {
-            // Then, we load that into cheerio and save it to $ for a shorthand selector
-            var $ = cheerio.load(response.data);
-            // Now, we grab every h2 within an article tag, and do the following:
-            // Now, we grab every h2 within an article tag, and do the following:
-            $(".FeedItem_item").each(function (i, element) {
-                // Save an empty result object
-                var result = {};
+        axios.get("https://www.reuters.com/news/world")
+            .then(function (response) {
+                // Then, we load that into cheerio and save it to $ for a shorthand selector
+                var $ = cheerio.load(response.data);
+                $(".FeedItem_item").each(function (i, element) {
+                    // Save an empty result object
+                    var result = {};
 
-                // Add the text and href of every link, and save them as properties of the result object
+                    // Add the text and href of every link, and save them as properties of the result object
 
-                result.title = $(this)
-                    .find("h2 a")
-                    .text().trim();
-                result.link = $(this)
-                    .find("h2 a")
-                    .attr("href");
-                result.summary = $(this)
-                    .find(".FeedItemLede_lede")
-                    .text().trim();
-                result.image = $(this)
-                    .find("span a img")
-                    .attr("src");
-                // Create a new Article using the `result` object built from scraping
-                db.Article.create(result)
-                    .then(function (dbArticle) {
-                        // View the added result in the console
-                        console.log(dbArticle);
-                    })
-                    .catch(function (err) {
-                        // If an error occurred, log it
-                        console.log(err);
-                    });
+                    result.title = $(this)
+                        .find("h2 a")
+                        .text().trim();
+                    result.link = $(this)
+                        .find("h2 a")
+                        .attr("href");
+                    result.summary = $(this)
+                        .find(".FeedItemLede_lede")
+                        .text().trim();
+                    result.image = $(this)
+                        .find("span a img")
+                        .attr("src");
+                    // Create a new Article using the `result` object built from scraping
+
+                    db.Article.create(result)
+                        .then(function (dbArticle) {
+                            // View the added result in the console
+                            console.log(dbArticle);
+                        })
+                        .catch(function (err) {
+                            // If an error occurred, log it
+                            console.log(err);
+                        });
+                });
+
+                // Send a message to the client
+                res.send("Scrape Successful!");
+            }).catch(function (err) {
+                // If an error occurred, send it to the client
+
+                res.json(err);
             });
-
-            // Send a message to the client
-            res.send("Scrape Successful!");
-        });
     });
 
-// Route for getting all unsaved Articles from the db
-app.get("/articles", function (req, res) {
-    // Grab every unsaved document in the Articles collection
-    db.Article.find({})
-        .then(function (dbArticle) {
-            // If we were able to successfully find Articles, send them back to the client
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            // If an error occurred, send it to the client
-            res.json(err);
-        });
-});
+    // Route for getting all Articles from the db
+    app.get("/articles", function (req, res) {
+        // Grab every unsaved document in the Articles collection
+        db.Article.find({})
+            .then(function (dbArticle) {
+                // If we were able to successfully find Articles, send them back to the client
+                res.json(dbArticle);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
+    });
 
 
     // Route for saving articles
@@ -94,18 +98,18 @@ app.get("/articles", function (req, res) {
             });
     });
 
-        // Route for deleting all unsaved article
-        app.get("/articlesdel", function (req, res) {
-            // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-            db.Article.remove({ "saved": "0" })
-                .then(function (dbArticle) {
-                    res.json(dbArticle);
-                })
-                .catch(function (err) {
-                    // If an error occurred, send it to the client
-                    res.json(err);
-                });
-        });
+    // Route for deleting all unsaved article
+    app.get("/articlesdel", function (req, res) {
+        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+        db.Article.deleteMany({ "saved": "0" })
+            .then(function (dbArticle) {
+                res.json(dbArticle);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
+    });
 
 
     // Route for grabbing a specific Article by id, populate it with it's note
@@ -129,11 +133,40 @@ app.get("/articles", function (req, res) {
         // Create a new note and pass the req.body to the entry
         db.Note.create(req.body)
             .then(function (dbNote) {
-                return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+                return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { new: true });
             })
             .then(function (dbArticle) {
                 // If we were able to successfully update an Article, send it back to the client
                 res.json(dbArticle);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
+    });
+
+
+    // Route for saving articles
+    app.post("/notesav/", function (req, res) {
+        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+        console.log(req.body)
+        db.Note.update({ _id: req.body.id }, 
+            { $set: {title: req.body.title, body: req.body.body } })
+            .then(function (dbNote) {
+                res.json(dbNote);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
+    });
+
+    // Route for deleting a single article
+    app.get("/notedel/:id", function (req, res) {
+        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+        db.Note.deleteOne({ _id: req.params.id })
+            .then(function (dbNote) {
+                res.json(dbNote);
             })
             .catch(function (err) {
                 // If an error occurred, send it to the client
