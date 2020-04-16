@@ -10,7 +10,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+
 
 // Initialize Express
 var app = express();
@@ -47,6 +47,7 @@ require("./routes/htmlRoutes")(app);
 
 mongoose.Promise = global.Promise;
 
+const PORT = process.env.PORT || 3000;
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 mongoose.connect(MONGODB_URI);
