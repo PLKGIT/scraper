@@ -113,14 +113,37 @@ $(document).on("click", ".del", function () {
 
   $.ajax({
     method: "GET",
-    url: "/articlesdel/" + thisId
-  })
-    .then(function (data) {
-      console.log("Deleted Article")
-      console.log(data);
-      location.reload();
-    });
+    url: "/articles/" + thisId
+  }).then(function (data) {
+    if (data.note.length !== undefined) {
+      for (var j = 0; j < data.note.length; j++) {
+        $.ajax({
+          method: "GET",
+          url: "/notedel/" + data.note[j]._id
+        })
+      }
+    }
+  }).then(function (data) {
+    $.ajax({
+      method: "GET",
+      url: "/articlesdel/" + thisId
+    })
+      .then(function (data) {
+        console.log("Deleted Article")
+        console.log(data);
+        location.reload();
+      });
+
+  }).catch(function (err) {
+    res.json(err);
+  });
 });
+
+
+
+
+
+
 
 // Add Note
 $(document).on("click", ".note", function () {
@@ -210,24 +233,24 @@ $(document).on("click", ".manage", function () {
 $(document).on("click", ".savnote", function () {
   var thisId = $(this).attr("data-id");
 
-  if ($(".title").filter("[data-id='" + thisId + "']").val() === "" ||  $(".body").filter("[data-id='" + thisId + "']").val() === "") {
+  if ($(".title").filter("[data-id='" + thisId + "']").val() === "" || $(".body").filter("[data-id='" + thisId + "']").val() === "") {
     alert("Your note must include a title and content.")
   } else {
 
-  // Run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "POST",
-    url: "/notesav/" + thisId,
-    data: {
-      id: thisId,
-      title: $(".title").filter("[data-id='" + thisId + "']").val(),
-      body: $(".body").filter("[data-id='" + thisId + "']").val()
-    }
-  })
-    .then(function (data) {
-      console.log(data);
-      // $("#notes").empty();
-    });
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "POST",
+      url: "/notesav/" + thisId,
+      data: {
+        id: thisId,
+        title: $(".title").filter("[data-id='" + thisId + "']").val(),
+        body: $(".body").filter("[data-id='" + thisId + "']").val()
+      }
+    })
+      .then(function (data) {
+        console.log(data);
+        // $("#notes").empty();
+      });
   }
 });
 

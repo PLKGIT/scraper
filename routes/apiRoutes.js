@@ -147,7 +147,7 @@ module.exports = function (app) {
 
 
     // Route for saving articles
-    app.post("/notesav/", function (req, res) {
+    app.post("/notesav/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
         console.log(req.body)
         db.Note.update({ _id: req.body.id }, 
