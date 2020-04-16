@@ -45,7 +45,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 const PORT = process.env.PORT || 3000;
 
