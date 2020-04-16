@@ -45,9 +45,9 @@ require("./routes/htmlRoutes")(app);
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://root:passw0rd@ds147167.mlab.com:47167/heroku_k8dbw3ph"
-);
+
+  var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
+  mongoose.connect(MONGODB_URI);
 
 // Start the server
 app.listen(PORT, function () {
