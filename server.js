@@ -23,12 +23,15 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true }).then(
-  () => { console.log("Ready!") },
-  err => { console.log("There was a connection error") }
-);
+// mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true }).then(
+//   () => { console.log("Ready!") },
+//   err => { console.log("There was a connection error") }
+// );
+mongoose.connect(MONGODB_URI);
+
 
 // Handlebars
 app.engine(
