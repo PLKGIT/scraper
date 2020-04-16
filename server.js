@@ -23,24 +23,11 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-
-mongoose.Promise = global.Promise;
-
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://kellypl:2020root@ds035485.mlab.com:35485/heroku_l1kt7s2p"
-  {
-    useMongoClient: true
-  }
-
-  );
-
 // Connect to the Mongo DB
 // mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true }).then(
 //   () => { console.log("Ready!") },
 //   err => { console.log("There was a connection error") }
 // );
-
-
 
 // Handlebars
 app.engine(
@@ -55,6 +42,16 @@ app.set("view engine", "handlebars");
 //---------------------------------------
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://root:passw0rd@ds147167.mlab.com:47167/heroku_k8dbw3ph",
+  {
+    useMongoClient: true
+  }
+
+);
 
 // Start the server
 app.listen(PORT, function () {
