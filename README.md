@@ -45,7 +45,7 @@ Full-Stack Coding Bootcamp through UCB Extension
 #### Github repository
 [Github Link](https://github.com/PLKGIT/scraper) at https://github.com/PLKGIT/scraper
 #### Deployed Application
-[All the News Fit to Scrape](https://sheltered-hollows-42889.herokuapp.com/) at https://sheltered-hollows-42889.herokuapp.com/
+[All the News Fit to Scrape](https://lit-fortress-02262.herokuapp.com/) at https://lit-fortress-02262.herokuapp.com/
 #### All the News Fit to Scrape on Portfolios
 [Professional Porfolio](https://www.pamkelly.com/portdev.html) at https://www.pamkelly.com/portdev.html
 
