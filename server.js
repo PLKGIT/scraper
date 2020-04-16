@@ -46,11 +46,7 @@ require("./routes/htmlRoutes")(app);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://root:passw0rd@ds147167.mlab.com:47167/heroku_k8dbw3ph",
-  {
-    useMongoClient: true
-  }
-
+  process.env.MONGODB_URI || "mongodb://root:passw0rd@ds147167.mlab.com:47167/heroku_k8dbw3ph"
 );
 
 // Start the server
