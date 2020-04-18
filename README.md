@@ -1,7 +1,7 @@
 # All the News That's Fit to Scrape
 
 ## Overview
-Web app that allows users to view and leave comments on the latest news scraped from Reuters' World News website. Scraped articles and associated notes are stored in a MongoDB database.
+Users can view and comment on the latest news scraped from Reuters' World News website. Scraped articles and any associated notes are stored in a MongoDB database.
 
 ![Scraper](./public/assets/img/scraper.gif "Reuters World News Mongo Scraper")
 
