@@ -1,12 +1,22 @@
 # All the News That's Fit to Scrape
 
+## Overview
+Web app that allows users to view and leave comments on the latest news scraped from Reuters' World News website. Scraped articles and associated notes are stored in a MongoDB database.
+
 ![Scraper](./public/assets/img/scraper.gif "Reuters World News Mongo Scraper")
 
+### Using the Scraper
+  * Launch Scraper web application
+  * The app scrapes the following data from Reuter World News at https://www.reuters.com/news/world:
+     * Article Title
+     * Article Summary
+     * Article Link
+     * Article Photo
+  * Article data is stored in a MongoDB
+  * Scraped articles are displayed on the application's home page
+  * Users can save articles as well as post, update, and delete article notes, which are saved to MongoDB
 
-## Overview
-Web app that allows users to view and leave comments on the latest news scraped from Reuters World News using Mongoose and Cheerio. Scraped articles are stored in a MongoDB database.
-
-### Technologies Used
+### Technologies
   * Node JS v12.13.0
   * Express Node Package Manager (NPM) v4.17.1
   * Cheerio NPM
@@ -20,32 +30,17 @@ Web app that allows users to view and leave comments on the latest news scraped 
   * Materialize CSS
   * Material Icons
 
-### Using the Scraper
-  * Launch Scraper web application
-  * The app scrapes the following data from Reuter World News at https://www.reuters.com/news/world:
-     * Article Title
-     * Article Summary
-     * Article Link
-     * Article Photo
-  * Article data is stored in a MongoDB
-  * Scraped articles are displayed on the application's home page
-  * Users can save articles as well as post, update, and delete article notes, which are saved to MongoDB
+## Development Details
 
-## Completed Assignment
-
-### Due
-Sunday, April 12, 2020
-
-### Student
+### Developer
 Pam Kelly at [esq.kelly@gmail.com](mailto:esq.kelly@gmail.com)
 
-Full-Stack Coding Bootcamp through UCB Extension
+### GitHub repository
+[GitHub](https://github.com/PLKGIT/scraper) at https://github.com/PLKGIT/scraper
 
-### Completed Assignment URLs
-#### Github repository
-[Github Link](https://github.com/PLKGIT/scraper) at https://github.com/PLKGIT/scraper
-#### Deployed Application
+### Deployed Application
 [All the News Fit to Scrape](https://lit-fortress-02262.herokuapp.com/) at https://lit-fortress-02262.herokuapp.com/
+
 #### All the News Fit to Scrape on Portfolios
 [Professional Porfolio](https://www.pamkelly.com/portdev.html) at https://www.pamkelly.com/portdev.html
 
